@@ -1,0 +1,19 @@
+{
+  "name": "replica-netflix",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "jsonserver --watch db.json"
+  },
+  "dependencies": {
+    "jsonserver": "^0.1.6"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.12.7"
+  }
+}
