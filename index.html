@@ -8,15 +8,35 @@
 </head>
 <body>
        <div class="nav">
-            <img id="logo" src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Logo Netflix">
-            <button>Accedi</button>
-            <button class="btn" id="home">Home</button>
-            <button class="btn" id="serie">Serie</button>
-            <button class="btn" id="film">Film</button>
-            <button class="btn" id="news">Nuovi e popolari</button>
-            <button class="btn" id="mylist">La mia lista</button>
-            <button class="btn" id="language">Sfoglia per lingua</button>
-            <button class="btn" id="shearch"><img id="icon-search"src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1"></button>
+        <a href="index.html"><img id="logo" src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Logo Netflix"></a>
+        <ul class="navigation">
+            <li class="btn-nav" id="home"><a href="index.html">Home</a></li>
+            <li class="btn-nav" id="serie"><a href="">Serie</a></li>
+            <li class="btn-nav" id="film"><a href="">Film</a></li>
+            <li class="btn-nav" id="game"><a href="">Giochi</a></li>
+            <li class="btn-nav" id="new"><a href="">Nuovi e popolari</a></li>
+            <li class="btn-nav" id="mylist"><a href="">La mia lista</a></li>
+            <li class="btn-nav" id="language"><a href="">Sfoglia per lingua</a></li>
+            </ul>
+
+            <div class="second-nav">
+                <div id="nav-search">
+                <button class="btn" id="shearch"><img class="img-second-nav" id="icon-search"src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1"></button>
+                </div>
+
+                <div id="nav-bambini">
+                    <a href="">Bambini</a>
+                </div>
+
+                <div id="nav-notification">
+                    <button class="btn" id="notification"><img class="img-second-nav" id="icon-notification"src="https://img.icons8.com/ios-glyphs/30/filled-appointment-reminders.png" alt="filled-appointment-reminders"/></button>
+                </div>
+
+                <div id="nav-user">
+                    <a href="login.html">Accedi</a>
+                </div>
+        
+            </div>
        </div>
 </body>
 </html>

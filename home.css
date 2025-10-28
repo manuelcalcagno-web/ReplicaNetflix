@@ -1,26 +1,97 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background: #141414;
+  height: 100vh;
+  background: #141414;
+  color: #fff;
+  font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu, sans-serif;
+}
+
+.nav {
+  font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu, sans-serif;
+  height: 68px;
+  width: 100%;
+  padding: 0 4%;
+  font-size: 14px;
+  background: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+#logo {
+  width: 92px;
+  cursor: pointer;
+  margin-right: 25px;
+  display: flex;
+  align-items: center;
+}
+
+#logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+}
+
+li {
+    list-style-type: none;
+    margin-left: 20px;
+}
+
+a {
+    text-decoration: none;
     color: #fff;
 }
 
-#nav {
+.second-nav {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background: #141414;
-    padding: 10px 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 9999;
+    height: 100%;
+    position: absolute;
+    justify-content: flex-end;
+    right: 4%;
+    
 }
 
-.logo {
-    width: 100px;
+.btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
 }
+
+.img-second-nav {
+    color: #fff;
+    width: 24px;
+    height: 24px;
+}
+
+#nav-search {
+    margin-right: 15px;
+}
+
+#nav-bambini {
+    margin-right: 15px;
+}
+
+#nav-notification {
+    margin-right: 15px;
+}  
+
+
+
+
+
