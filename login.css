@@ -7,6 +7,12 @@
 body {
     height: 100vh;
     background: #141414;
+    background-image: 
+    linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+    url(https://redcapes.it/wp-content/uploads/2019/06/netflix.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     color: #fff;
     display: flex;
     justify-content: center;
@@ -44,4 +50,30 @@ input {
 
 a {
     color: white;
+}
+
+.nav {
+    font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu, sans-serif;
+    height: 68px;
+    width: 100%;
+    padding: 0 4%;
+    font-size: 14px;
+    background: #141414;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+img {
+  width: 92px;
+  cursor: pointer;
+  margin-right: 25px;
+  display: flex;
+  align-items: center;
 }

@@ -1,21 +1,22 @@
 window.document.addEventListener('DOMContentLoaded', () => {
     
     const Films = [];
+    const svuotaContainer = document.getElementById("input");
+    svuotaContainer.innerHTML = "";
 
     class Film {
-        constructor(titolo, categoria, durata, img) {
+        constructor(titolo, categoria, durata, immagine) {
             this.titolo = titolo;
             this.categoria = categoria;
             this.durata = durata;
-            this.img = img;
+            this.immagine = immagine;
         }
     }
 
     function listaFilm () {
-        const container = document.getElementById("input");
         const table = document.getElementById("dashboard");
         const buttonAdd = document.getElementById("bottone");
-        buttonAdd.addEventListener("click", aggiungiFilm());
+        buttonAdd.addEventListener("click", aggiungiFilm);
 
     }
 
@@ -26,28 +27,93 @@ window.document.addEventListener('DOMContentLoaded', () => {
 
         if(lista){
             const film = JSON.parse(localStorage.getItem("Films"));
-            film.map(element => {
-            });((film) => {
+            film.map((element, index) =>{
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                    <td>${film.titolo}</td>
-                    <td>${film.categoria}</td>
-                    <td>${film.durata}</td>
-                    <td>${film.img}</td>
-                    <td>
-                        <button class="btn-modifica" id="${film.titolo}-modifica">Modiifica</button>
-                        <button class="btn-elimina" id="${film.titolo}-elimina">Elimina</button>
-                    </td>
+                    <td>${element.titolo}</td>
+                    <td>${element.categoria}</td>
+                    <td>${element.durata}</td>
+                    <td><img src="${element.immagine}"></td>
+                    <td><button class="btn" id="${index}">Modifica</button>
+                    <button class="btn-elimina" id="${index}">Elimina</button></td>
                 `;
                 body_tb.appendChild(row);
             });
-        }
 
+            document.querySelectorAll(".btn-elimina").forEach(btn => {
+                btn.addEventListener("click", function () {
+                    const id = this.getAttribute("id");
+                    const film = JSON.parse(localStorage.getItem("Films"));
+                    film.splice(id, 1);
+                    localStorage.setItem("Films", JSON.stringify(film));
+                    renderFilm();
+                });
+            });
+
+            /*document.querySelectorAll(".btn").forEach(btn => {
+                btn.addEventListener("click", function () {
+                    const id = this.getAttribute("id");
+                    let film = JSON.parse(localStorage.getItem("Films")) || [];
+                    const filmDaModificare = film[id];
+                    const inputContainer = document.getElementById("input");
+                    inputContainer.innerHTML = "";
+
+                    const inputTitolo = document.createElement("input");
+                    inputTitolo.type = "text";
+                    inputTitolo.value = filmDaModificare.titolo
+
+                    const inputCategoria = document.createElement("input");
+                    inputCategoria.type = "text";
+                    inputCategoria.value = filmDaModificare.categoria;
+
+                    const inputDurata = document.createElement("input");
+                    inputDurata.type = "number";
+                    inputDurata.value = filmDaModificare.durata;
+
+                    const inputImmagine = document.createElement("input");
+                    inputImmagine.type = "text";
+                    inputImmagine.value = filmDaModificare.immagine;
+
+                    const bottoneSalva = document.createElement("button");
+                    bottoneSalva.textContent = "Salva modifiche";
+
+                    bottoneSalva.addEventListener("click", () => {
+                        film = film.map((element, i) => {
+                            if (i == index) {
+                                return new Film(
+                                    inputTitolo.value,
+                                    inputCategoria.value,
+                                    inputDurata.value,
+                                    inputImmagine.value
+                                );
+                            }
+                            return element;
+                        });
+                        localStorage.setItem("Films", JSON.stringify(film));
+                        inputContainer.innerHTML = "";
+                        renderFilm();
+                    });
+
+                    inputContainer.appendChild(inputTitolo);
+                    inputContainer.appendChild(inputCategoria);
+                    inputContainer.appendChild(inputDurata);
+                    inputContainer.appendChild(inputImmagine);
+                    inputContainer.appendChild(bottoneSalva);
+                });
+            });*/
+
+        } else{
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td colspan="5">Nessun film presente</td>
+            `;
+            body_tb.appendChild(row);
+        }
     }
 
-    function confermaFilm(titolo, categoria, durata, img) {
+    function confermaFilm(titolo, categoria, durata, immagine) {
         let film = JSON.parse(localStorage.getItem("Films")) || [];
-        const nuovoFilm = new Film(titolo, categoria, durata, img);
+        const nuovoFilm = new Film(titolo, categoria, durata, immagine);
         film.push(nuovoFilm);
         localStorage.setItem("Films", JSON.stringify(film));
         console.table(film);
@@ -56,50 +122,42 @@ window.document.addEventListener('DOMContentLoaded', () => {
     }
 
     function aggiungiFilm() {
+        const inputContainer = document.getElementById("input");
+
         const inputTitolo = document.createElement("input");
-        inputTitolo.id = "input-titolo";
+        inputTitolo.type = "text";
         inputTitolo.placeholder = "Titolo";
 
         const inputCategoria = document.createElement("input");
-        inputCategoria.id = "input-categoria";
+        inputCategoria.type = "text";
         inputCategoria.placeholder = "Categoria";
 
         const inputDurata = document.createElement("input");
-        inputDurata.id = "input-durata";
         inputDurata.type = "number";
         inputDurata.placeholder = "Durata (min)";
 
-        const inputImg = document.createElement("input");
-        inputImg.id = "input-img";
-        inputImg.type = "href";
-        inputImg.accept = "image/*";
-        inputImg.placeholder = "Immagine";
+        const inputImmagine = document.createElement("input");
+        inputImmagine.type = "text";
+        inputImmagine.placeholder = "Immagine";
 
-        const btn_conferma = document.createElement("button");
-        btn_conferma.id = "btn-conferma";
-        btn_conferma.innerText = "Conferma";
-
-        const inputContainer = document.getElementById("input");
-        inputContainer.id = "input-container";
+        const bottoneConferma = document.createElement("button");
+        bottoneConferma.id = "btn-conferma";
+        bottoneConferma.textContent = "Conferma";
+        bottoneConferma.addEventListener("click", () => {
+            const titolo = inputTitolo.value;
+            const categoria = inputCategoria.value;
+            const durata = inputDurata.value;
+            const img = inputImmagine.value;
+            confermaFilm(titolo, categoria, durata, img);
+            inputContainer.innerHTML  = "";
+        });
 
         inputContainer.appendChild(inputTitolo);
         inputContainer.appendChild(inputCategoria);
         inputContainer.appendChild(inputDurata);
-        inputContainer.appendChild(inputImg);
-        inputContainer.appendChild(btn_conferma);
-
-        btn_conferma.addEventListener("click", function () {
-            if (!inputTitolo.value || !inputCategoria.value || !inputDurata.value || !inputImg.value) {
-                alert("Compila tutti i campi");
-                return;
-            }
-            confermaFilm(inputTitolo.value, inputCategoria.value, inputDurata.value, inputImg.value);
-
-            inputTitolo.value = "";
-            inputCategoria.value = "";
-            inputDurata.value = "";
-            inputImg.value = "";
-        });
+        inputContainer.appendChild(inputImmagine);
+        inputContainer.appendChild(bottoneConferma);
     }
     listaFilm();
+    renderFilm();
 });

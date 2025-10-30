@@ -20,33 +20,101 @@ body {
     justify-content: center;
 }
 
+/* ===== TABELLA ===== */
 table {
-    border-collapse: separate; /* permette di vedere il border-radius */
-    border: 3px solid white;   /* bordo bianco */
-    border-radius: 12px;       /* angoli arrotondati */
-    overflow: hidden;   
-    display: flex;
-    justify-content: center;
-    border-color: white;
+    border-collapse: collapse; /* migliore per bordi uniformi */
+    border: 2px solid #fff;
+    border-radius: 12px;
+    overflow: hidden; /* mantiene il radius visibile */
+    width: 80%;
+    max-width: 900px;
+    background-color: rgba(255, 255, 255, 0.05); /* leggero contrasto */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
-#body-dashboard {
-    background:transparent;
-    color: white;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    border-color: white;
+thead {
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 th, td {
-    padding: 10px 20px;;
-    border-right: 1px solid white;
-    border-bottom: 1px solid white;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     text-align: center;
+}
+
+th {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+img {
+    width: 60px;
+    height: auto;
+    border-radius: 6px;
+}
+
+#body-dashboard tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.btn {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #f40612;
+}
+
+.btn-elimina {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-elimina:hover {
+    background-color: #f40612;
+}
+
+input {
+    background-color: #141414;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.2s ease;
+}
+
+#btn-conferma {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.2s ease;
 }
 
 #azioni-film {
     border-right: none;
 }
-
