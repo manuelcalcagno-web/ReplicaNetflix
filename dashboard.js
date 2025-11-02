@@ -29,6 +29,7 @@ window.document.addEventListener('DOMContentLoaded', () => {
             const film = JSON.parse(localStorage.getItem("Films"));
             film.map((element, index) =>{
                 const row = document.createElement("tr");
+                row.id = `riga_${index}`;
                 row.innerHTML = `
                     <td>${element.titolo}</td>
                     <td>${element.categoria}</td>
@@ -40,7 +41,16 @@ window.document.addEventListener('DOMContentLoaded', () => {
                 body_tb.appendChild(row);
             });
 
-            document.querySelectorAll(".btn-elimina").forEach(btn => {
+            
+        } else{
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td colspan="5">Nessun film presente</td>
+            `;
+            body_tb.appendChild(row);
+        }
+
+        document.querySelectorAll(".btn-elimina").forEach(btn => {
                 btn.addEventListener("click", function () {
                     const id = this.getAttribute("id");
                     const film = JSON.parse(localStorage.getItem("Films"));
@@ -50,66 +60,40 @@ window.document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
-            /*document.querySelectorAll(".btn").forEach(btn => {
+            document.querySelectorAll(".btn").forEach(btn => {
                 btn.addEventListener("click", function () {
                     const id = this.getAttribute("id");
-                    let film = JSON.parse(localStorage.getItem("Films")) || [];
-                    const filmDaModificare = film[id];
-                    const inputContainer = document.getElementById("input");
-                    inputContainer.innerHTML = "";
-
-                    const inputTitolo = document.createElement("input");
-                    inputTitolo.type = "text";
-                    inputTitolo.value = filmDaModificare.titolo
-
-                    const inputCategoria = document.createElement("input");
-                    inputCategoria.type = "text";
-                    inputCategoria.value = filmDaModificare.categoria;
-
-                    const inputDurata = document.createElement("input");
-                    inputDurata.type = "number";
-                    inputDurata.value = filmDaModificare.durata;
-
-                    const inputImmagine = document.createElement("input");
-                    inputImmagine.type = "text";
-                    inputImmagine.value = filmDaModificare.immagine;
-
-                    const bottoneSalva = document.createElement("button");
-                    bottoneSalva.textContent = "Salva modifiche";
-
-                    bottoneSalva.addEventListener("click", () => {
-                        film = film.map((element, i) => {
-                            if (i == index) {
-                                return new Film(
-                                    inputTitolo.value,
-                                    inputCategoria.value,
-                                    inputDurata.value,
-                                    inputImmagine.value
-                                );
-                            }
-                            return element;
-                        });
-                        localStorage.setItem("Films", JSON.stringify(film));
-                        inputContainer.innerHTML = "";
-                        renderFilm();
-                    });
-
-                    inputContainer.appendChild(inputTitolo);
-                    inputContainer.appendChild(inputCategoria);
-                    inputContainer.appendChild(inputDurata);
-                    inputContainer.appendChild(inputImmagine);
-                    inputContainer.appendChild(bottoneSalva);
+                    modificaFilm(id);
                 });
-            });*/
+            });
 
-        } else{
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td colspan="5">Nessun film presente</td>
-            `;
-            body_tb.appendChild(row);
-        }
+            function modificaFilm() {
+                const idRiga = document.getElementById(`riga_${index}`);
+                idRiga.innerHTML = `
+                    <td><input type="text" id="${element.titolo}"></td>
+                    <td><input type="text" id="${element.categoria}"></td>
+                    <td><input type="number" id="${element.durata}"></td>
+                    <td><input type="text" id="${element.immagine}"></td>
+                    <td><button class="btn-conferma">Conferma</button>
+                    <button class="btn-annulla">Annulla</button></td>`;
+
+                const conferma = document.querySelector(".btn-conferma");
+                conferma.addEventListener("click", function () {
+                    const id = this.getAttribute("id");
+                    const film = JSON.parse(localStorage.getItem("Films"));
+                    film.splice(id, 1);
+                    localStorage.setItem("Films", JSON.stringify(film));
+                    renderFilm();
+
+                const annulla = document.querySelector(".btn-annulla");
+                annulla.addEventListener("click", function () {
+                    renderFilm();
+                });
+            });
     }
+
+
+}
 
     function confermaFilm(titolo, categoria, durata, immagine) {
         let film = JSON.parse(localStorage.getItem("Films")) || [];
@@ -122,8 +106,9 @@ window.document.addEventListener('DOMContentLoaded', () => {
     }
 
     function aggiungiFilm() {
+        
         const inputContainer = document.getElementById("input");
-
+        
         const inputTitolo = document.createElement("input");
         inputTitolo.type = "text";
         inputTitolo.placeholder = "Titolo";
